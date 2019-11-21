@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -61,7 +61,7 @@
                 </p>
             </div>
 
-        <form action="check" method="GET" target="result" onsubmit="check()">
+        <form action="check" method="GET" target="result" onsubmit="check()" accept-charset="UTF-8">
             <div class="button">
                 <input type="submit" id="submit" value=" Результат " >
             </div>
@@ -79,7 +79,7 @@
     </div>
     <div class="bottomSidebar">
         <div id="frame" class="container">
-            <iframe id="result" name = "result" src="check?x_v=1&r_v=2&y_v=1"></iframe>
+            <iframe id="result" name = "result" src="check?x_v=1&y_v=1&r_v=2"></iframe>
         </div>
     </div>
 </div>
