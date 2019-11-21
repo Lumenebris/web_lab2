@@ -12,7 +12,7 @@
 </head>
 <body>
 <table class="results block centered" align="center">
-    <tr> <th>X</th> <th>Y</th> <th>R</th> <th><b>Результат</b></th></tr>
+    <tr> <th>X</th> <th>Y</th> <th>R</th> <th><b>Результат</b></th><th><b>Показать</b></th></tr>
     <%
         ArrayList<Point> list = (ArrayList)request.getSession().getAttribute("list");
         for (Point point : list) {
@@ -22,7 +22,7 @@
         <td align="center"><%=point.getY() %></td>
         <td align="center"><%=point.getR()%></td>
         <td align="center"><%=point.isInArea() ? "Попадание" : "Промах" %></td>
-
+        <td align="center"><button onclick='parent.showPoint(<%=point.getX()%>,<%=point.getY()%>,<%=point.getR()%>)'>+</button></td>
     </tr>
     <%}%>
 
