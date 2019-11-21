@@ -36,11 +36,11 @@ public class AreaCheckServlet extends HttpServlet {
 
         }
         try {
-        String xString = request.getParameter("x_v");
-        String yString = request.getParameter("y_v");
-        String RString = request.getParameter("r_v");
+            double x = Double.parseDouble(request.getParameter("x_v").trim());
+            double y = Double.parseDouble(request.getParameter("y_v").trim());
+            double r = Double.parseDouble(request.getParameter("r_v").trim());
 
-        p = new Point(Double.parseDouble(xString), Double.parseDouble(yString.replace(",", ".")), Double.parseDouble(RString));
+        p = new Point(x, y, r);
         p.setInArea(p.checkArea(p.getX(), p.getY(), p.getR()));
         list.add(p);
 
