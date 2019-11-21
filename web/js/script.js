@@ -109,7 +109,8 @@ function clickOnGraph(r) {
 
     if (is_default_graphic) {
         createGraphic('canvas', 0);
-        err.append('Не выбрано значение R');
+        err.append('You have to set R parameter');
+        return;
     }
 
     let br = canvas.getBoundingClientRect();
@@ -119,7 +120,9 @@ function clickOnGraph(r) {
     let event = window.event;
     let x = event.clientX - left;
     let y = event.clientY - top;
-
+    document.getElementById("x_id").value = (x - 150) / 130 * r;
+    document.getElementById("y_id").value = (-y + 150) / 130 * r;
+    markPointFromServer((x - 150) / 130 * r, (-y + 150) / 130 * r, r);
     markPoint((x - 150) / 130 * r, (-y + 150) / 130 * r, r);
 }
 
@@ -142,16 +145,21 @@ function showPoint(x, y, r){
 }
 
 function markPointFromServer(x, y, r) {
+    let error = document.getElementById('error');
     console.log('try to mark point from server with x:' + x + ', y:' + y + ', r:' + r);
-        fetch("./check?&x_v=" + encodeURI(x) + "&y_v=" + encodeURI(y) + "&r_v=" + encodeURI(r), {
+    if (!checkAllParameters(x, y, r)) {
+        error('Wrong parameters');
+        return false;
+    } else {
+        fetch("./check?&x_v=" + encodeURI(x) + "&y_v=" + encodeURI(y) + "&r_v=" + encodeURI(r) , {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain;charset=UTF-8'
             }
-        }).finally(function (res) {
-            console.log(res)
-        });
-        document.getElementById('result').src = document.getElementById('result').src;
+        })
+        document.getElementById('result').src = document.getElementById('result').src
+        return true;
+    }
 }
 
 function checkAllParameters(x, y, r) {
@@ -174,13 +182,12 @@ function isArea(x, y, r) {
         return true;
     }
     if ((y <= 0) && (x >= 0) && ((Math.pow(x,2) + Math.pow(y,2)) <= (Math.pow(r, 2)))) {
-        return true
+        return true;
     }
     return false;
 }
 
 function markPoint(x, y, r) {
-
     let canvas = document.getElementById('canvas'), context = canvas.getContext("2d");
     //createGraphic(r);
 
@@ -229,35 +236,35 @@ function verifyY(y) {
 		if (isNaN(yValue)) {
 			y.focus();
             elem.style.backgroundColor = '#cab2cb';
-			message('y должен быть числом');
+			//message('y is a number');
 			y.value = '';
             return false;
 		} else if (!pattern.test(y.value)) {
             y.focus();
             elem.style.backgroundColor = '#cab2cb';
-			message('y должен быть числом');
+			//message('y is a number');
 			y.value = '';
             return false;
         } else if (yValue < yMin || yValue > yMax) {
 			y.focus();
             elem.style.backgroundColor = '#cab2cb';
-			message('y вне диапазона');
+			//message('y in [-5; 5]');
 			y.value = '';
             return false;
 		} else if (y.value.length > 5) {
 			y.focus();
             elem.style.backgroundColor = '#cab2cb';
-			message('длина y не должна превышать 5');
+			//message('length < 6');
 			y.value = '';
             return false;
 		}
         elem.style.backgroundColor = '#FFF';
-		document.getElementById('message').style.visibility = 'hidden';
+		//document.getElementById('message').style.visibility = 'hidden';
         y_out.value = yValue;
         return true;
     }
     elem.style.backgroundColor = '#FFF';
-	document.getElementById('message').style.visibility = 'hidden';
+	//document.getElementById('message').style.visibility = 'hidden';
     y_out.value = '_';
     return true;
 }
@@ -314,14 +321,14 @@ function check() {
 	// если y не введен
 	if (!flag_y) {
 		let err_y = document.createElement('div');
-		err_y.innerHTML = 'Не введено значение y';
+		err_y.innerHTML = 'You have to set Y parameter';
 		error.append(err_y);
 	}
 
 	// если x не выбран
 	if (!isCorrectX(xInput.value)) {
 		let err_x = document.createElement('div');
-		err_x.innerHTML = 'Не выбрано значение x';
+		err_x.innerHTML = 'You have to set X parameter';
 		error.append(err_x);
         flag_x = 0;
 	}
@@ -329,7 +336,7 @@ function check() {
     // если r не выбран
     if (!isCorrectR(rInput.value)) {
         let err_r = document.createElement('div');
-        err_r.innerHTML = 'Не выбрано значение r';
+        err_r.innerHTML = 'You have to set R parameter';
         error.append(err_r);
         flag_r = 0;
     }
