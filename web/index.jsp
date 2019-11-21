@@ -83,5 +83,5 @@
         </div>
     </div>
 </div>
-<div class="footer">Copyright © <a href="https://github.com/Lumenebris/web_lab1">Lumenebris</a>, 2019</div>
+<div class="footer">Copyright © <a href="https://github.com/Lumenebris/web_lab2">Lumenebris</a>, 2019</div>
 </body>
