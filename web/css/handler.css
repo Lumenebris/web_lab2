@@ -1,0 +1,20 @@
+body {
+	text-align: center;
+	font-size: 18px;
+	color: #045FB4;
+	font-family: Consolas, monospace;
+	background-color: #C6E2FD;
+}
+
+table {
+	border-collapse: collapse;
+	border: 1px solid #2e6da4;
+	width: 400px;
+	text-align: center;
+	margin: auto;
+}
+
+tr td, th {
+	border: 1px solid #2e6da4;
+	padding: 10px;
+}
