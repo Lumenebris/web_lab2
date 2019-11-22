@@ -35,19 +35,32 @@ public class AreaCheckServlet extends HttpServlet {
             request.getSession().setAttribute("list", list);
 
         }
+        boolean load;
+        boolean r0;
+
         try {
-            double x = Double.parseDouble(request.getParameter("x_v").trim());
-            double y = Double.parseDouble(request.getParameter("y_v").trim());
-            double r = Double.parseDouble(request.getParameter("r_v").trim());
+            load = request.getParameter("load").equals("1");
+            r0 = request.getParameter("r_v").equals("0");
+        } catch (NullPointerException e) {
+            load = false;
+            r0 = false;
+        }
+        
+        if (!load && !r0) {
+            try {
+                double x = Double.parseDouble(request.getParameter("x_v").trim());
+                double y = Double.parseDouble(request.getParameter("y_v").trim());
+                double r = Double.parseDouble(request.getParameter("r_v").trim());
 
-        p = new Point(x, y, r);
-        p.setInArea(p.checkArea(p.getX(), p.getY(), p.getR()));
-        list.add(p);
+                p = new Point(x, y, r);
+                p.setInArea(p.checkArea(p.getX(), p.getY(), p.getR()));
+                list.add(p);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.getSession().setAttribute("list", list);
-            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+                request.getSession().setAttribute("list", list);
+                request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            }
         }
         response.setContentType("text/html; charset=UTF-8");
         request.getSession().setAttribute("list", list);
