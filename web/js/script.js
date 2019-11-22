@@ -146,11 +146,13 @@ function showPoint(x, y, r){
 
 function markPointFromServer(x, y, r) {
     let error = document.getElementById('error');
+    error.innerHTML = '';
     console.log('try to mark point from server with x:' + x + ', y:' + y + ', r:' + r);
     if (!checkAllParameters(x, y, r)) {
-        error('Wrong parameters');
+        error.append('Wrong parameters');
         return false;
     } else {
+        //document.getElementById("flag").value = 0;
         fetch("./check?&x_v=" + encodeURI(x) + "&y_v=" + encodeURI(y) + "&r_v=" + encodeURI(r) , {
             method: 'GET',
             headers: {
@@ -209,6 +211,8 @@ function markPoint(x, y, r) {
 function setR(r) {
     document.getElementById('r_out').value = r;
     document.getElementById('r_id').value = r;
+    let err = document.getElementById('errorGraph');
+    err.innerHTML = '';
     createGraphic('canvas', r);
 }
 
