@@ -5,7 +5,7 @@
     <title>LW2 WEB</title>
     <link rel="shortcut icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <script type="text/javascript"><%@include file='js/script.js' %></script>
+    <script type="text/javascript" charset="UTF-8"><%@include file='js/script.js' %></script>
 </head>
 <body onload="init()">
 <header>
@@ -70,6 +70,7 @@
             <input type="hidden" name="r_v" id="r_id" value="0">
             <input type="hidden" name="x_v" id="x_id" value="0">
             <input type="hidden" name="y_v" id="y_id" value="0">
+            <input type="hidden" autocomplete="off" name="load" id="load" value="0">
         </form>
         </div>
         <div class="graph">
@@ -79,7 +80,7 @@
     </div>
     <div class="bottomSidebar">
         <div id="frame" class="container">
-            <iframe id="result" name = "result" src="check?x_v=1&y_v=1&r_v=2"></iframe>
+            <iframe id="result" name = "result" src="check?x_v=1&y_v=1&r_v=2&load=1"></iframe>
         </div>
     </div>
 </div>
