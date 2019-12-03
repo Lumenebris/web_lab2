@@ -103,6 +103,8 @@ function createGraphic(id, r) {
 }
 
 function clickOnGraph(r) {
+    document.getElementById("x_out").value = "_";
+    document.getElementById("y_out").value = "_";
     let canvas = document.getElementById('canvas');
     let err = document.getElementById('errorGraph');
     err.innerHTML = '';
