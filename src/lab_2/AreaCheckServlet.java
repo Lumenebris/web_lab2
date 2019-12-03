@@ -52,9 +52,11 @@ public class AreaCheckServlet extends HttpServlet {
                 double y = Double.parseDouble(request.getParameter("y_v").trim());
                 double r = Double.parseDouble(request.getParameter("r_v").trim());
 
-                p = new Point(x, y, r);
-                p.setInArea(p.checkArea(p.getX(), p.getY(), p.getR()));
-                list.add(p);
+               if (r != 0) {
+                    p = new Point(x, y, r);
+                    p.setInArea(p.checkArea(p.getX(), p.getY(), p.getR()));
+                    list.add(p);
+                } else System.err.println("Incorrect R parameter");
 
             } catch (Exception e) {
                 e.printStackTrace();
